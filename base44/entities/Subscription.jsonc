@@ -1,0 +1,54 @@
+{
+  "name": "Subscription",
+  "type": "object",
+  "properties": {
+    "user_email": {
+      "type": "string",
+      "format": "email",
+      "description": "\u05de\u05d9\u05d9\u05dc \u05d4\u05de\u05e9\u05ea\u05de\u05e9"
+    },
+    "plan": {
+      "type": "string",
+      "enum": [
+        "free",
+        "premium",
+        "family"
+      ],
+      "default": "free",
+      "description": "\u05e1\u05d5\u05d2 \u05d4\u05de\u05e0\u05d5\u05d9"
+    },
+    "start_date": {
+      "type": "string",
+      "format": "date",
+      "description": "\u05ea\u05d0\u05e8\u05d9\u05da \u05ea\u05d7\u05d9\u05dc\u05ea \u05d4\u05de\u05e0\u05d5\u05d9"
+    },
+    "end_date": {
+      "type": "string",
+      "format": "date",
+      "description": "\u05ea\u05d0\u05e8\u05d9\u05da \u05e1\u05d9\u05d5\u05dd \u05d4\u05de\u05e0\u05d5\u05d9"
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true,
+      "description": "\u05d4\u05d0\u05dd \u05d4\u05de\u05e0\u05d5\u05d9 \u05e4\u05e2\u05d9\u05dc"
+    }
+  },
+  "required": [
+    "user_email",
+    "plan"
+  ],
+  "rls": {
+    "create": {
+      "created_by": "{{user.email}}"
+    },
+    "read": {
+      "user_email": "{{user.email}}"
+    },
+    "update": {
+      "user_email": "{{user.email}}"
+    },
+    "delete": {
+      "user_email": "{{user.email}}"
+    }
+  }
+}

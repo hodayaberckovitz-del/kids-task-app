@@ -1,0 +1,62 @@
+{
+  "name": "Badge",
+  "type": "object",
+  "properties": {
+    "child_profile_id": {
+      "type": "string",
+      "description": "\u05de\u05d6\u05d4\u05d4 \u05e4\u05e8\u05d5\u05e4\u05d9\u05dc \u05d4\u05d9\u05dc\u05d3"
+    },
+    "badge_type": {
+      "type": "string",
+      "enum": [
+        "morning_king",
+        "consistent",
+        "pro_saver",
+        "streak_7",
+        "streak_14",
+        "streak_30",
+        "level_up"
+      ],
+      "description": "\u05e1\u05d5\u05d2 \u05d4\u05ea\u05d2"
+    },
+    "title": {
+      "type": "string",
+      "description": "\u05e9\u05dd \u05d4\u05ea\u05d2"
+    },
+    "icon": {
+      "type": "string",
+      "description": "\u05d0\u05de\u05d5\u05d2'\u05d9/\u05d0\u05d9\u05d9\u05e7\u05d5\u05df \u05e9\u05dc \u05d4\u05ea\u05d2"
+    },
+    "unlocked_date": {
+      "type": "string",
+      "format": "date",
+      "description": "\u05ea\u05d0\u05e8\u05d9\u05da \u05e4\u05ea\u05d9\u05d7\u05ea \u05d4\u05ea\u05d2"
+    },
+    "family_id": {
+      "type": "string",
+      "description": "\u05de\u05d6\u05d4\u05d4 \u05d4\u05de\u05e9\u05e4\u05d7\u05d4"
+    }
+  },
+  "required": [
+    "child_profile_id",
+    "badge_type",
+    "title",
+    "icon",
+    "unlocked_date",
+    "family_id"
+  ],
+  "rls": {
+    "create": {
+      "family_id": "{{user.family_id}}"
+    },
+    "read": {
+      "family_id": "{{user.family_id}}"
+    },
+    "update": {
+      "family_id": "{{user.family_id}}"
+    },
+    "delete": {
+      "family_id": "{{user.family_id}}"
+    }
+  }
+}

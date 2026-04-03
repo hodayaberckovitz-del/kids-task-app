@@ -1,0 +1,61 @@
+{
+  "name": "WhatsAppConfig",
+  "type": "object",
+  "properties": {
+    "family_id": {
+      "type": "string"
+    },
+    "parent_phone": {
+      "type": "string"
+    },
+    "child_phones": {
+      "type": "object",
+      "description": "\u05de\u05d9\u05e4\u05d5\u05d9 child_profile_id -> \u05de\u05e1\u05e4\u05e8 \u05d8\u05dc\u05e4\u05d5\u05df"
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": false
+    },
+    "daily_summary_time": {
+      "type": "string",
+      "default": "20:00"
+    },
+    "morning_reminder_time": {
+      "type": "string",
+      "default": "07:30"
+    },
+    "evening_reminder_time": {
+      "type": "string",
+      "default": "19:00"
+    },
+    "send_task_reminders": {
+      "type": "boolean",
+      "default": true
+    },
+    "send_completion_notifications": {
+      "type": "boolean",
+      "default": true
+    },
+    "whatsapp_webhook_url": {
+      "type": "string",
+      "description": "webhook URL \u05dc\u05e9\u05dc\u05d9\u05d7\u05ea \u05d4\u05d5\u05d3\u05e2\u05d5\u05ea"
+    }
+  },
+  "required": [
+    "family_id"
+  ],
+  "rls": {
+    "create": {
+      "family_id": "{{user.family_id}}"
+    },
+    "read": {
+      "family_id": "{{user.family_id}}"
+    },
+    "update": {
+      "family_id": "{{user.family_id}}"
+    },
+    "delete": {
+      "family_id": "{{user.family_id}}"
+    }
+  }
+}

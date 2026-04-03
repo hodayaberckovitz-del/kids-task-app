@@ -1,0 +1,75 @@
+{
+  "name": "FamilyChallenge",
+  "type": "object",
+  "properties": {
+    "family_id": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string",
+      "description": "\u05e9\u05dd \u05d4\u05d0\u05ea\u05d2\u05e8"
+    },
+    "description": {
+      "type": "string"
+    },
+    "reward_description": {
+      "type": "string",
+      "description": "\u05de\u05d4 \u05d4\u05de\u05e9\u05e4\u05d7\u05d4 \u05de\u05e7\u05d1\u05dc\u05ea"
+    },
+    "target_type": {
+      "type": "string",
+      "enum": [
+        "all_tasks",
+        "task_count",
+        "streak"
+      ],
+      "default": "task_count"
+    },
+    "target_value": {
+      "type": "number",
+      "default": 50
+    },
+    "current_value": {
+      "type": "number",
+      "default": 0
+    },
+    "start_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "end_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "is_completed": {
+      "type": "boolean",
+      "default": false
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "required": [
+    "family_id",
+    "title",
+    "target_type",
+    "target_value",
+    "start_date",
+    "end_date"
+  ],
+  "rls": {
+    "create": {
+      "family_id": "{{user.family_id}}"
+    },
+    "read": {
+      "family_id": "{{user.family_id}}"
+    },
+    "update": {
+      "family_id": "{{user.family_id}}"
+    },
+    "delete": {
+      "family_id": "{{user.family_id}}"
+    }
+  }
+}

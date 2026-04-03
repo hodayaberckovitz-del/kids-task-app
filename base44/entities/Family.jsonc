@@ -1,0 +1,80 @@
+{
+  "name": "Family",
+  "type": "object",
+  "properties": {
+    "family_name": {
+      "type": "string"
+    },
+    "family_code": {
+      "type": "string"
+    },
+    "primary_parent_email": {
+      "type": "string",
+      "format": "email"
+    },
+    "parent_panel_password": {
+      "type": "string"
+    },
+    "show_leaderboard": {
+      "type": "boolean",
+      "default": true,
+      "description": "\u05d4\u05d0\u05dd \u05dc\u05d4\u05e6\u05d9\u05d2 \u05dc\u05d5\u05d7 \u05de\u05d5\u05d1\u05d9\u05dc\u05d9\u05dd \u05d1\u05d9\u05df \u05d0\u05d7\u05d9\u05dd"
+    },
+    "parent_emails": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "\u05e8\u05e9\u05d9\u05de\u05ea \u05de\u05d9\u05d9\u05dc\u05d9\u05dd \u05e9\u05dc \u05d4\u05d5\u05e8\u05d9\u05dd \u05de\u05d5\u05e8\u05e9\u05d9\u05dd \u05e0\u05d5\u05e1\u05e4\u05d9\u05dd"
+    }
+  },
+  "required": [
+    "family_name",
+    "family_code",
+    "primary_parent_email"
+  ],
+  "rls": {
+    "create": {
+      "created_by": "{{user.email}}"
+    },
+    "read": {
+      "$or": [
+        {
+          "id": "{{user.family_id}}"
+        },
+        {
+          "primary_parent_email": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "primary_parent_email": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "primary_parent_email": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

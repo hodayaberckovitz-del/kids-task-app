@@ -1,0 +1,171 @@
+{
+  "name": "ChildProfile",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "age": {
+      "type": "number"
+    },
+    "birth_date": {
+      "type": "string",
+      "format": "date",
+      "description": "\u05ea\u05d0\u05e8\u05d9\u05da \u05dc\u05d9\u05d3\u05d4"
+    },
+    "age_group": {
+      "type": "string",
+      "enum": [
+        "young",
+        "middle",
+        "teen"
+      ],
+      "default": "middle",
+      "description": "\u05e7\u05d1\u05d5\u05e6\u05ea \u05d2\u05d9\u05dc: young=4-7, middle=8-12, teen=13+"
+    },
+    "is_adult": {
+      "type": "boolean",
+      "default": false
+    },
+    "gender": {
+      "type": "string",
+      "enum": [
+        "boy",
+        "girl",
+        "other"
+      ]
+    },
+    "favorite_character": {
+      "type": "string"
+    },
+    "color_theme": {
+      "type": "string",
+      "enum": [
+        "blue",
+        "green",
+        "purple",
+        "red",
+        "pink",
+        "rainbow",
+        "space",
+        "ocean"
+      ],
+      "default": "blue"
+    },
+    "task_display_mode": {
+      "type": "string",
+      "enum": [
+        "text_only",
+        "visual_large"
+      ],
+      "default": "text_only"
+    },
+    "language": {
+      "type": "string",
+      "enum": [
+        "he",
+        "en",
+        "ru",
+        "ar"
+      ],
+      "default": "he"
+    },
+    "parent_name": {
+      "type": "string"
+    },
+    "parent_email": {
+      "type": "string",
+      "format": "email"
+    },
+    "family_id": {
+      "type": "string"
+    },
+    "total_tokens": {
+      "type": "number",
+      "default": 0
+    },
+    "current_streak": {
+      "type": "number",
+      "default": 0
+    },
+    "best_streak": {
+      "type": "number",
+      "default": 0
+    },
+    "streak_bonus_enabled": {
+      "type": "boolean",
+      "default": true
+    },
+    "streak_bonus_tokens": {
+      "type": "number",
+      "default": 1
+    },
+    "show_gift_unlock_popup": {
+      "type": "boolean",
+      "default": true
+    },
+    "last_completion_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "parent_message": {
+      "type": "string"
+    },
+    "parent_message_icon": {
+      "type": "string"
+    },
+    "bedtime_hour": {
+      "type": "number",
+      "description": "\u05e9\u05e2\u05ea \u05e9\u05d9\u05e0\u05d4 (0-23)",
+      "default": 21
+    },
+    "wakeup_hour": {
+      "type": "number",
+      "description": "\u05e9\u05e2\u05ea \u05d4\u05ea\u05e2\u05d5\u05e8\u05e8\u05d5\u05ea (0-23)",
+      "default": 7
+    },
+    "sleep_mode_enabled": {
+      "type": "boolean",
+      "default": false,
+      "description": "\u05d4\u05d0\u05dd \u05de\u05e6\u05d1 \u05dc\u05d9\u05dc\u05d4 \u05de\u05d5\u05e4\u05e2\u05dc"
+    }
+  },
+  "required": [
+    "name",
+    "parent_email",
+    "parent_name",
+    "family_id"
+  ],
+  "rls": {
+    "create": {
+      "family_id": "{{user.family_id}}"
+    },
+    "read": {
+      "family_id": "{{user.family_id}}"
+    },
+    "update": {
+      "$or": [
+        {
+          "family_id": "{{user.family_id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "family_id": "{{user.family_id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}
