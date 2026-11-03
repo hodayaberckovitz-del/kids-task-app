@@ -7,8 +7,6 @@ import { pagesConfig } from './pages.config'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import PageNotFound from './lib/PageNotFound';
 import { AuthProvider, useAuth } from '@/lib/AuthContext';
-import Pricing from './pages/Pricing';
-import CalendarView from './pages/CalendarView';
 
 const { Pages, Layout, mainPage } = pagesConfig;
 const mainPageKey = mainPage ?? Object.keys(Pages)[0];
@@ -47,8 +45,6 @@ const AuthenticatedApp = () => {
           }
         />
       ))}
-      <Route path="/Pricing" element={<LayoutWrapper currentPageName="Pricing"><Pricing /></LayoutWrapper>} />
-      <Route path="/CalendarView" element={<LayoutWrapper currentPageName="CalendarView"><CalendarView /></LayoutWrapper>} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
   );
