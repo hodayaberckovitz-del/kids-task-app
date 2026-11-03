@@ -218,7 +218,7 @@ export default function Dashboard() {
 
     } catch (error) {
       console.error(t('errorLoadingUser'), error);
-      if (error.message && error.message.includes("401")) {
+      if (error.message && (error.message.includes("401") || error.message.includes("Not authenticated"))) {
         navigate(createPageUrl("Registration"));
       } else {
         setConnectionError(true);
