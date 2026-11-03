@@ -20,6 +20,7 @@ import ChildrenManagementTab from "../components/parent-panel/ChildrenManagement
 import IdeasTab from "../components/parent-panel/IdeasTab";
 import FamilyShareTab from "../components/parent-panel/FamilyShareTab";
 import HouseholdTasksTab from "../components/parent-panel/HouseholdTasksTab";
+import WebtopSyncTab from "../components/parent-panel/WebtopSyncTab";
 
 export default function ParentPanel() {
   const { t, isRTL } = useLanguage();
@@ -411,7 +412,22 @@ export default function ParentPanel() {
               </motion.div>
 
               <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-                <Card 
+                <Card
+                  className="cursor-pointer hover:shadow-xl transition-all border-2 border-blue-200 h-full min-h-[120px]"
+                  onClick={() => setActiveTab('webtop')}
+                >
+                  <CardContent className="p-6 text-center min-h-[44px] flex flex-col justify-center">
+                    <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-blue-400 to-indigo-500 rounded-2xl flex items-center justify-center">
+                      <span className="text-4xl">📚</span>
+                    </div>
+                    <h3 className="font-bold text-lg text-gray-800">סנכרון webtop</h3>
+                    <p className="text-sm text-gray-600 mt-1">ייבוא שיעורי בית אוטומטי</p>
+                  </CardContent>
+                </Card>
+              </motion.div>
+
+              <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                <Card
                   className="cursor-pointer hover:shadow-xl transition-all border-2 border-indigo-200 h-full min-h-[120px]"
                   onClick={() => setActiveTab('household')}
                 >
@@ -519,11 +535,12 @@ export default function ParentPanel() {
               {activeTab === 'settings' && t('appSettingsTitle')}
               {activeTab === 'familyShare' && t('addParentTitle')}
               {activeTab === 'household' && t('householdTasksTitle')}
+              {activeTab === 'webtop' && 'סנכרון webtop'}
             </h1>
           </div>
 
           {/* Child Selector */}
-          {childProfiles.length > 0 && activeTab !== 'children' && activeTab !== 'settings' && activeTab !== 'household' && activeTab !== 'familyShare' && (
+          {childProfiles.length > 0 && activeTab !== 'children' && activeTab !== 'settings' && activeTab !== 'household' && activeTab !== 'familyShare' && activeTab !== 'webtop' && (
             <div className="w-full md:w-auto flex items-center gap-2 md:gap-3 bg-white p-2 md:p-4 rounded-lg md:rounded-2xl shadow-lg">
               <Users className="w-4 h-4 md:w-6 md:h-6 text-purple-600 flex-shrink-0" />
               <div className="flex-1 md:flex-initial min-w-0">
@@ -631,6 +648,13 @@ export default function ParentPanel() {
             {activeTab === 'familyShare' && (
               <FamilyShareTab
                 user={user}
+              />
+            )}
+
+            {activeTab === 'webtop' && (
+              <WebtopSyncTab
+                profile={childProfiles.find(c => c.id === selectedChildId)}
+                onDataChange={loadData}
               />
             )}
 
