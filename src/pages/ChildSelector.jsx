@@ -67,7 +67,13 @@ export default function ChildSelector() {
       }
     } catch (error) {
       console.error("Error loading data:", error);
-      navigate(createPageUrl("Registration"));
+      // Only redirect to Registration on explicit auth errors (401/403)
+      // Other errors (network, etc.) should not kick the user out
+      if (error?.status === 401 || error?.status === 403) {
+        navigate(createPageUrl("Registration"));
+      } else {
+        setShowAddForm(true);
+      }
     } finally {
       setIsLoading(false);
     }
