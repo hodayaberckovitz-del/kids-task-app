@@ -65,9 +65,10 @@ export default function Registration() {
           full_name: formData.fullName
         });
 
-        // After successful signup, redirect to Dashboard
-        // The OnboardingModal will automatically open there
-        navigate(createPageUrl("Dashboard"));
+        // Show message to check email instead of redirecting immediately
+        setError(null);
+        setIsSignUp(false);
+        alert("נשלח מייל אישור לכתובת שלך — אשרי ואז היכנסי עם הסיסמה");
       } else {
         // Sign in
         if (!formData.email || !formData.password) {

@@ -182,8 +182,7 @@ async function updateMe(fields) {
 
   const { error } = await supabase
     .from('user_profiles')
-    .update({ ...fields, updated_at: new Date().toISOString() })
-    .eq('id', user.id);
+    .upsert({ id: user.id, ...fields, updated_at: new Date().toISOString() }, { onConflict: 'id' });
   if (error) throw error;
 }
 
@@ -264,6 +263,16 @@ const integrations = {
     },
     GenerateImage: async () => ({ url: '' }),
     ExtractDataFromUploadedFile: async () => ({ status: 'error', details: 'Not available' }),
+    SendEmail: async (params) => {
+      console.warn('SendEmail: not available after base44 migration', params);
+      return { success: false };
+    },
+  },
+};
+
+const analytics = {
+  track: (params) => {
+    console.log('analytics.track (stub):', params);
   },
 };
 
@@ -273,4 +282,5 @@ export const base44 = {
   auth,
   functions,
   integrations,
+  analytics,
 };
